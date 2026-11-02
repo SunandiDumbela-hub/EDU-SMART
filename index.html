@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDU SMART - Sistem Informasi Pendidikan</title>
+<style>
+:root{--navy:#173d67;--blue:#2878b8;--bg:#f4f7fb;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:white;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}.logo{font-size:26px}.brand h1{font-size:19px;margin:0}.brand small{opacity:.8}
+.layout{display:flex;min-height:calc(100vh - 68px)}aside{width:230px;background:white;border-right:1px solid var(--line);padding:16px 10px}
+nav button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px;border-radius:8px;margin:3px 0;color:#334155;font-size:14px;cursor:pointer}
+nav button.active,nav button:hover{background:#eaf3fb;color:var(--navy);font-weight:bold}
+main{padding:24px;flex:1;min-width:0}.pagehead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+h2{margin:0 0 6px;font-size:24px}.muted{color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:14px;margin-bottom:20px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:17px}
+.card .num{font-size:28px;font-weight:bold;margin:10px 0 4px}.card .ico{font-size:22px;color:var(--blue)}
+.panel{margin-bottom:16px}.panel h3{margin:0 0 14px;font-size:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button.primary{background:var(--blue);color:white;border:0;border-radius:8px;padding:10px 14px;cursor:pointer}
+button.secondary{background:#eaf3fb;color:var(--navy);border:0;border-radius:8px;padding:9px 12px;cursor:pointer}
+input,select{padding:10px;border:1px solid #cbd5e1;border-radius:8px;width:100%;font-size:14px;background:white}
+.formrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:#475569;background:#f8fafc}
+.empty{padding:24px;text-align:center;color:var(--muted)}.hidden{display:none}.tag{background:#eaf3fb;color:var(--navy);padding:4px 8px;border-radius:20px;font-size:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(max-width:800px){.layout{display:block}aside{width:100%;border-right:0;border-bottom:1px solid var(--line);padding:8px}nav{display:flex;overflow:auto;gap:4px}nav button{white-space:nowrap;width:auto;padding:10px}.cards{grid-template-columns:repeat(2,1fr)}main{padding:16px}.grid2{grid-template-columns:1fr}}
+@media(max-width:480px){.formrow{grid-template-columns:1fr}.pagehead{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body>
+<header><div class="brand"><span class="logo">🎓</span><div><h1>EDU SMART</h1><small>Sistem Informasi Pendidikan</small></div></div><span id="today"></span></header>
+<div class="layout">
+<aside><nav id="nav">
+<button class="active" data-page="dashboard">▦ Dashboard</button><button data-page="siswa">👥 Data Siswa</button><button data-page="guru">🧑‍🏫 Data Guru</button><button data-page="kelas">🏫 Data Kelas</button><button data-page="absensi">✓ Absensi</button><button data-page="materi">📚 Materi</button><button data-page="nilai">📋 Penilaian</button><button data-page="laporan">📄 Laporan</button>
+</nav></aside>
+<main>
+<section id="dashboard" class="page">
+<div class="pagehead"><div><h2>Dashboard Sekolah</h2><div class="muted">Ringkasan data EDU SMART</div></div><span class="tag">Versi awal</span></div>
+<div class="cards">
+<div class="card"><div class="ico">👥</div><div class="num" id="countSiswa">0</div><div class="muted">Total Siswa</div></div>
+<div class="card"><div class="ico">🧑‍🏫</div><div class="num" id="countGuru">0</div><div class="muted">Total Guru</div></div>
+<div class="card"><div class="ico">🏫</div><div class="num" id="countKelas">0</div><div class="muted">Jumlah Kelas</div></div>
+<div class="card"><div class="ico">✓</div><div class="num" id="countHadir">0</div><div class="muted">Catatan Kehadiran</div></div>
+</div>
+<div class="grid2"><div class="panel"><h3>Selamat datang di EDU SMART</h3><p class="muted">Kelola data sekolah dalam satu tempat. Gunakan menu di sebelah kiri untuk mulai mengisi data.</p></div><div class="panel"><h3>Catatan penting</h3><p class="muted">Versi awal ini menyimpan data di browser perangkat ini. Database online, akun pengguna, dan sinkronisasi akan ditambahkan pada tahap berikutnya.</p></div></div>
+</section>
+<section id="siswa" class="page hidden"><div class="pagehead"><div><h2>Data Siswa</h2><div class="muted">Tambah dan kelola data peserta didik</div></div></div>
+<div class="panel"><h3>Tambah siswa</h3><form id="formSiswa"><div class="formrow"><input id="nis" placeholder="NIS / NISN" required><input id="namaSiswa" placeholder="Nama lengkap siswa" required><select id="kelasSiswa"><option value="">Pilih kelas</option></select></div><button class="primary">Simpan siswa</button></form></div>
+<div class="panel"><h3>Daftar siswa</h3><div class="tablewrap"><table><thead><tr><th>NIS/NISN</th><th>Nama</th><th>Kelas</th><th>Aksi</th></tr></thead><tbody id="listSiswa"></tbody></table></div></div></section>
+<section id="guru" class="page hidden"><div class="pagehead"><div><h2>Data Guru</h2><div class="muted">Daftar tenaga pendidik</div></div></div><div class="panel"><h3>Tambah guru</h3><form id="formGuru"><div class="formrow"><input id="nip" placeholder="NIP (opsional)"><input id="namaGuru" placeholder="Nama lengkap guru" required><input id="mapelGuru" placeholder="Mata pelajaran"></div><button class="primary">Simpan guru</button></form></div><div class="panel"><h3>Daftar guru</h3><div class="tablewrap"><table><thead><tr><th>NIP</th><th>Nama</th><th>Mata pelajaran</th><th>Aksi</th></tr></thead><tbody id="listGuru"></tbody></table></div></div></section>
+<section id="kelas" class="page hidden"><div class="pagehead"><div><h2>Data Kelas</h2><div class="muted">Kelola rombongan belajar</div></div></div><div class="panel"><h3>Tambah kelas</h3><form id="formKelas"><div class="formrow"><input id="namaKelas" placeholder="Contoh: Kelas 1A" required><input id="waliKelas" placeholder="Nama wali kelas"><input id="tahunAjaran" placeholder="Tahun ajaran, contoh 2026/2027"></div><button class="primary">Simpan kelas</button></form></div><div class="panel"><h3>Daftar kelas</h3><div class="tablewrap"><table><thead><tr><th>Nama kelas</th><th>Wali kelas</th><th>Tahun ajaran</th><th>Aksi</th></tr></thead><tbody id="listKelas"></tbody></table></div></div></section>
+<section id="absensi" class="page hidden"><div class="pagehead"><div><h2>Absensi Siswa</h2><div class="muted">Catat kehadiran harian</div></div></div><div class="panel"><h3>Catat kehadiran</h3><form id="formAbsensi"><div class="formrow"><select id="siswaAbsensi" required><option value="">Pilih siswa</option></select><input id="tanggalAbsensi" type="date" required><select id="statusAbsensi"><option>Hadir</option><option>Izin</option><option>Sakit</option><option>Alpa</option></select></div><button class="primary">Simpan absensi</button></form></div><div class="panel"><h3>Riwayat absensi</h3><div class="tablewrap"><table><thead><tr><th>Tanggal</th><th>Nama siswa</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="listAbsensi"></tbody></table></div></div></section>
+<section id="materi" class="page hidden"><div class="pagehead"><div><h2>Materi Pembelajaran</h2><div class="muted">Catatan materi dan topik pembelajaran</div></div></div><div class="panel"><h3>Tambah materi</h3><form id="formMateri"><div class="formrow"><input id="judulMateri" placeholder="Judul materi" required><input id="mapelMateri" placeholder="Mata pelajaran" required><input id="kelasMateri" placeholder="Kelas"></div><button class="primary">Simpan materi</button></form></div><div class="panel"><h3>Daftar materi</h3><div class="tablewrap"><table><thead><tr><th>Judul</th><th>Mata pelajaran</th><th>Kelas</th><th>Aksi</th></tr></thead><tbody id="listMateri"></tbody></table></div></div></section>
+<section id="nilai" class="page hidden"><div class="pagehead"><div><h2>Penilaian</h2><div class="muted">Catat nilai siswa</div></div></div><div class="panel"><h3>Input nilai</h3><form id="formNilai"><div class="formrow"><select id="siswaNilai" required><option value="">Pilih siswa</option></select><input id="aspekNilai" placeholder="Aspek / mata pelajaran" required><input id="angkaNilai" type="number" min="0" max="100" placeholder="Nilai 0-100" required></div><button class="primary">Simpan nilai</button></form></div><div class="panel"><h3>Daftar nilai</h3><div class="tablewrap"><table><thead><tr><th>Nama siswa</th><th>Aspek</th><th>Nilai</th><th>Aksi</th></tr></thead><tbody id="listNilai"></tbody></table></div></div></section>
+<section id="laporan" class="page hidden"><div class="pagehead"><div><h2>Laporan</h2><div class="muted">Ringkasan data yang telah dimasukkan</div></div><button class="primary" onclick="window.print()">Cetak halaman</button></div><div class="panel"><h3>Ringkasan sekolah</h3><p id="ringkasan" class="muted"></p></div><div class="panel"><h3>Ekspor data cadangan</h3><p class="muted">Unduh salinan data yang tersimpan di browser ini.</p><button class="secondary" onclick="exportData()">Unduh cadangan JSON</button></div></section>
+<footer>EDU SMART • Versi awal • Data tersimpan pada perangkat/browser ini</footer>
+</main></div>
+<script>
+const keys=['siswa','guru','kelas','absensi','materi','nilai'];
+const get=k=>JSON.parse(localStorage.getItem('edu_'+k)||'[]');
+const put=(k,v)=>localStorage.setItem('edu_'+k,JSON.stringify(v));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function removeItem(k,i){let a=get(k);a.splice(i,1);put(k,a);render()}
+function row(items,k,cols){let el=document.getElementById('list'+k[0].toUpperCase()+k.slice(1));el.innerHTML=items.length?items.map((x,i)=>'<tr>'+cols.map(c=>'<td>'+esc(x[c])+'</td>').join('')+'<td><button class=\"secondary\" onclick=\"removeItem('+JSON.stringify(k)+','+i+')\">Hapus</button></td></tr>').join(''):'<tr><td colspan=\"5\" class=\"empty\">Belum ada data.</td></tr>'}
+function render(){
+let siswa=get('siswa'),guru=get('guru'),kelas=get('kelas'),abs=get('absensi');
+countSiswa.textContent=siswa.length;countGuru.textContent=guru.length;countKelas.textContent=kelas.length;countHadir.textContent=abs.filter(x=>x.status==='Hadir').length;
+kelasSiswa.innerHTML='<option value="">Pilih kelas</option>'+kelas.map(x=>'<option>'+esc(x.nama)+'</option>').join('');
+siswaAbsensi.innerHTML='<option value="">Pilih siswa</option>'+siswa.map(x=>'<option>'+esc(x.nama)+'</option>').join('');
+siswaNilai.innerHTML='<option value="">Pilih siswa</option>'+siswa.map(x=>'<option>'+esc(x.nama)+'</option>').join('');
+row(siswa,'siswa',['nis','nama','kelas']);row(guru,'guru',['nip','nama','mapel']);row(kelas,'kelas',['nama','wali','tahun']);
+row(abs,'absensi',['tanggal','nama','status']);row(get('materi'),'materi',['judul','mapel','kelas']);row(get('nilai'),'nilai',['nama','aspek','angka']);
+ringkasan.textContent=`Terdapat ${siswa.length} siswa, ${guru.length} guru, ${kelas.length} kelas, ${abs.length} catatan absensi, ${get('materi').length} materi, dan ${get('nilai').length} nilai.`;
+}
+function add(form,key,build){document.getElementById(form).addEventListener('submit',e=>{e.preventDefault();let a=get(key);a.push(build());put(key,a);e.target.reset();render()})}
+add('formSiswa','siswa',()=>({nis:nis.value,nama:namaSiswa.value,kelas:kelasSiswa.value}));
+add('formGuru','guru',()=>({nip:nip.value,nama:namaGuru.value,mapel:mapelGuru.value}));
+add('formKelas','kelas',()=>({nama:namaKelas.value,wali:waliKelas.value,tahun:tahunAjaran.value}));
+add('formAbsensi','absensi',()=>({nama:siswaAbsensi.value,tanggal:tanggalAbsensi.value,status:statusAbsensi.value}));
+add('formMateri','materi',()=>({judul:judulMateri.value,mapel:mapelMateri.value,kelas:kelasMateri.value}));
+add('formNilai','nilai',()=>({nama:siswaNilai.value,aspek:aspekNilai.value,angka:angkaNilai.value}));
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(b.dataset.page).classList.remove('hidden')}));
+function exportData(){let data={};keys.forEach(k=>data[k]=get(k));let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cadangan-edu-smart.json';a.click();URL.revokeObjectURL(a.href)}
+document.getElementById('today').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+document.getElementById('tanggalAbsensi').value=new Date().toISOString().slice(0,10);
+render();
+</script></body></html>
